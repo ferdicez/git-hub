@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bitcoin Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-brand">
+      <span class="btc-icon">₿</span>
+      <h1>Bitcoin Dashboard</h1>
+    </div>
+    <div class="update-status" id="updateStatus">Carregando...</div>
+  </header>
+
+  <main class="container">
+
+    <!-- Cards de estatísticas -->
+    <section class="stats-grid">
+      <div class="card stat-card">
+        <span class="stat-label">Preço Atual (USD)</span>
+        <span class="stat-value" id="priceUsd">--</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-label">Preço Atual (BRL)</span>
+        <span class="stat-value" id="priceBrl">--</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-label">Variação 24h</span>
+        <span class="stat-value" id="change24h">--</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-label">Cap. de Mercado</span>
+        <span class="stat-value" id="marketCap">--</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-label">Volume 24h</span>
+        <span class="stat-value" id="volume24h">--</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-label">Máx. Histórico</span>
+        <span class="stat-value" id="ath">--</span>
+      </div>
+    </section>
+
+    <!-- Gráfico com seletor de período -->
+    <section class="card chart-section">
+      <div class="chart-header">
+        <h2>Variação de Preço</h2>
+        <div class="period-controls">
+          <div class="quick-buttons">
+            <button class="btn-period active" data-days="7">7D</button>
+            <button class="btn-period" data-days="30">30D</button>
+            <button class="btn-period" data-days="90">90D</button>
+            <button class="btn-period" data-days="365">1A</button>
+            <button class="btn-period" data-days="max">Máx</button>
+          </div>
+          <div class="date-range">
+            <label for="dateFrom">De:</label>
+            <input type="date" id="dateFrom" />
+            <label for="dateTo">Até:</label>
+            <input type="date" id="dateTo" />
+            <button class="btn-apply" id="applyRange">Aplicar</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrapper">
+        <canvas id="mainChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Gráficos lado a lado -->
+    <div class="charts-row">
+
+      <section class="card chart-section">
+        <div class="chart-header">
+          <h2>Variação Semanal</h2>
+          <span class="chart-subtitle">Últimos 7 dias</span>
+        </div>
+        <div class="chart-wrapper chart-wrapper--small">
+          <canvas id="weeklyChart"></canvas>
+        </div>
+      </section>
+
+      <section class="card chart-section">
+        <div class="chart-header">
+          <h2>Variação Anual</h2>
+          <span class="chart-subtitle">Últimos 365 dias</span>
+        </div>
+        <div class="chart-wrapper chart-wrapper--small">
+          <canvas id="yearlyChart"></canvas>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    Dados fornecidos por <a href="https://www.coingecko.com" target="_blank">CoinGecko</a> &mdash;
+    Atualização automática a cada 60 segundos
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
